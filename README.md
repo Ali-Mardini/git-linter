@@ -1,4 +1,4 @@
-# Git Linter
+# Git Linter2
 ## Git commit standard
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
@@ -31,7 +31,7 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 cd [project-name]
-npm install git-linter
+npm install git-linter2
 ```
 ## Licence
 ISC
