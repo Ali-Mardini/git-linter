@@ -1,6 +1,6 @@
 {
     "name": "git-linter",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Git Linter is simple package that make sure to prevent any commit that is not matching the Conventional Commits, run unit test before commiting and run eslint or add it if it is not exist",
     "main": "index.js",
     "scripts": {
