@@ -23,22 +23,22 @@ if (packageFile.scripts.test == '' || packageFile.scripts.test == undefined) {
 
 // bash script to run it as commit msg
 var commitMsg =
-    '#!/bin/bash' +
+    '#!/bin/bash \n' +
 
-    '# Color variables' +
-    "red='\033[0;31m'" +
-    '# Clear the color after that' +
-    "clear='\033[0m'" +
+    '# Color variables \n' +
+    "red='\033[0;31m' \n" +
+    '# Clear the color after that \n' +
+    "clear='\033[0m' \n" +
 
-    'if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?: .{1,}$"; then' +
+    'if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?: .{1,}$"; then \n' +
 
-    '    echo -e "${red}Aborting commit. Your commit message is invalid. Please follow this format e.g: feat(scope): Initial commit${clear}" >&2' +
-    '    exit 1' +
-    'fi' +
-    'if ! head -1 "$1" | grep -qE "^.{1,88}$"; then' +
-    '    echo "Aborting commit. Your commit message is too long." >&2' +
-    '    exit 1' +
-    'fi';
+    '    echo -e "${red}Aborting commit. Your commit message is invalid. Please follow this format e.g: feat(scope): Initial commit${clear}" >&2 \n' +
+    '    exit 1 \n' +
+    'fi \n' +
+    'if ! head -1 "$1" | grep -qE "^.{1,88}$"; then \n' +
+    '    echo "Aborting commit. Your commit message is too long." >&2 \n' +
+    '    exit 1 \n' +
+    'fi \n';
 
 // create commit msg file in hooks folder 
 fs.writeFileSync('../../.git/hooks/commit-msg', commitMsg);
