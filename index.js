@@ -41,7 +41,7 @@ var commitMsg =
     'fi';
 
 // create commit msg file in hooks folder 
-fs.writeFileSync(__dirname + '/.git/hooks/commit-msg', commitMsg);
+fs.writeFileSync('../../.git/hooks/commit-msg', commitMsg);
 
 // make hook file executable
 exec("chmod +x .git/hooks/commit-msg", (error, stdout, stderr) => {
@@ -63,7 +63,7 @@ npm run lint && npm test
 `;
 
 // create commit msg file in hooks folder 
-fs.writeFileSync(__dirname + '/.git/hooks/pre-commit', preCommit);
+fs.writeFileSync('../../.git/hooks/pre-commit', preCommit);
 
 // make hook file executable
 exec("chmod +x .git/hooks/pre-commit", (error, stdout, stderr) => {
