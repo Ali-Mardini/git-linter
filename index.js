@@ -44,7 +44,7 @@ var commitMsg =
 fs.writeFileSync('../../.git/hooks/commit-msg', commitMsg);
 
 // make hook file executable
-exec("chmod +x .git/hooks/commit-msg", (error, stdout, stderr) => {
+exec("chmod +x ../../.git/hooks/commit-msg", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
@@ -66,7 +66,7 @@ npm run lint && npm test
 fs.writeFileSync('../../.git/hooks/pre-commit', preCommit);
 
 // make hook file executable
-exec("chmod +x .git/hooks/pre-commit", (error, stdout, stderr) => {
+exec("chmod +x ../../.git/hooks/pre-commit", (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
         return;
