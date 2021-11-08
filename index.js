@@ -17,23 +17,31 @@ if (packageFile.scripts.lint != '' || packageFile.scripts.lint == undefined) {
 }
 
 // check if the test scripts exist in package.json
-if (packageFile.scripts.test != '' || packageFile.scripts.test == undefined) {
+if (packageFile.scripts.test == '' || packageFile.scripts.test == undefined) {
     console.log('No Test Script is specified!');
 }
 
-// run bash command to copy git hook to the hooks folder
-exec("cp bashScripts/commit-msg .git/hooks/commit-msg", (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-});
+// bash script to run it as commit msg
+var commitMsg =
+    '#!/bin/bash' +
 
+    '# Color variables' +
+    "red='\033[0;31m'" +
+    '# Clear the color after that' +
+    "clear='\033[0m'" +
+
+    'if ! head -1 "$1" | grep -qE "^(feat|fix|chore|docs|test|style|refactor|perf|build|ci|revert)(\(.+?\))?: .{1,}$"; then' +
+
+    '    echo -e "${red}Aborting commit. Your commit message is invalid. Please follow this format e.g: feat(scope): Initial commit${clear}" >&2' +
+    '    exit 1' +
+    'fi' +
+    'if ! head -1 "$1" | grep -qE "^.{1,88}$"; then' +
+    '    echo "Aborting commit. Your commit message is too long." >&2' +
+    '    exit 1' +
+    'fi';
+
+// create commit msg file in hooks folder 
+fs.writeFileSync(__dirname + '/.git/hooks/commit-msg', commitMsg);
 
 // make hook file executable
 exec("chmod +x .git/hooks/commit-msg", (error, stdout, stderr) => {
@@ -48,19 +56,14 @@ exec("chmod +x .git/hooks/commit-msg", (error, stdout, stderr) => {
     console.log(`stdout: ${stdout}`);
 });
 
+// bash script run as pre commit hook
+var preCommit = `
+#!/bin/sh
+npm run lint && npm test
+`;
 
-// run bash command to copy git hook to the hooks folder
-exec("cp bashScripts/pre-commit .git/hooks/pre-commit", (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-});
+// create commit msg file in hooks folder 
+fs.writeFileSync(__dirname + '/.git/hooks/pre-commit', preCommit);
 
 // make hook file executable
 exec("chmod +x .git/hooks/pre-commit", (error, stdout, stderr) => {

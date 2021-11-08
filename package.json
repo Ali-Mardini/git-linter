@@ -5,12 +5,10 @@
     "main": "index.js",
     "scripts": {
         "test": "jest",
-        "lint": "eslint --fix"
+        "lint": "eslint --fix",
+        "postinstall": "node index.js"
     },
-    "keywords": [
-        "git",
-        "codeing-standard"
-    ],
+    "keywords": ["git", "codeing-standard"],
     "author": "Ali Mardini",
     "bugs": {
         "url": "https://github.com/Ali-Mardini/git-linter/issues"
